@@ -1,0 +1,5 @@
+Total posts: {{total_posts}}
+{% for user in users %}
+<hr>
+{{ user }} has created {{ user.post_count }} posts
+{% endfor %}

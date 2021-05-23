@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% extends 'account/main.html' %}
+{% block content %}
+<head>
+    <title>User posts</title>
+</head>
+
+<body>
+
+	<div class="w3-main">
+		<div class="w3-bar w3-black w3-wide w3-padding">
+			<div class="post_detail">
+				<div>
+					<h5>Author : {{ post.author|linebreaksbr }}</h5>
+					<h6>This post was published on : {{ post.published_date }} </h6>
+				</div>
+				<h2><span style="font-weight:bold">{{ post.title }}</span></h2>
+				<hr>
+				{% if post.image %}
+				<img src="{{ post.image.url }}" alt="Travelling" style="width:80%; height:15%">
+				{% endif %}
+				<hr>
+				<h3><p>{{ post.text|linebreaksbr }}</p></h3>
+				{% if post.on_blockchain == True %}
+					<hr>
+				<div class="w3-center">
+					This post is running on blockchain
+				</div>
+					<hr>
+					Post's transaction Id on blockchain is: <h5>{{post.transaction_id}}</h5>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{% if user.is_authenticated and post.author == user %}
+	<p><a href="{% url 'post_edit' pk=post.pk %}">
+		<button class="w3-button w3-light-grey w3-block">Edit</button>
+	</a></p>
+	{% endif %}
+
+</body>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'account/main.html' %}
+{% block content %}
+
+<head>
+    <title>User_data</title>
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static '/css/profile_style.css' %}">
+
+</head>
+
+<body>
+<div class="w3-bar w3-black w3-wide w3-padding w3-card container">
+	<div class="page-content page-container" id="page-content">
+			<div class="padding">
+				<div class="row container d-flex justify-content-center">
+					<div class="col-xl-6 col-md-12">
+						<div class="card user-card-full">
+							<div class="row m-l-0 m-r-0">
+								<form method='GET' action="" >
+									{% csrf_token %}
+								</form>
+								<div class="col-sm-4 user-profile">
+									<div class="card-block text-center text-white">
+										<div class="image-upload">
+											<img src="{{ user.avatar.url }}" class="img-radius" name="avatar" alt="User-Profile-Avatar"/>
+										    <form method='POST' class="post-form" enctype="multipart/form-data">
+    											{% csrf_token %}
+    										    <div class="fieldWrapper">
+    												{{ form.avatar.errors }}
+    												{{ form.avatar.label_tag }}: {{ form.avatar }}
+    											</div>
+    											<!--<button type="submit" class="save btn btn-default">Save</button>-->
+											</form>
+										</div>
+										<div class="w3-button w3-light-grey w3-block">
+										<h6 class="f-w-600">{{user.username}}</h6>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-8">
+									<div class="card-block">
+										<h4 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h4>
+										<div class="row">
+											<div class="col-sm-6">
+												<p class="m-b-10 f-w-600">Email</p>
+												<h6 class="text-muted f-w-400">{{user.email}}</h6>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<p class="m-b-10 f-w-600">Registration date</p>
+												<h6 class="text-muted f-w-400">{{user.date_joined}}</h6>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<p class="m-b-10 f-w-600">Staff</p>
+												<h6 class="text-muted f-w-400">{{user.is_staff}}</h6>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-6">
+												<p class="m-b-10 f-w-600">Permissions</p>
+												<h6 class="text-muted f-w-400">{{user.user_permissions}}</h6>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		</div>
+</div>
+
+
+
+</body>
+
+{% endblock %}

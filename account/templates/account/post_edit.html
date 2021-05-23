@@ -1,0 +1,25 @@
+{% extends 'account/main.html' %}
+
+{% block content %}
+
+	<div class="w3-bar w3-black w3-wide w3-padding w3-card container" style="margin-left:300px">
+		<h2>Edit your post</h2>
+		<form method="POST" class="post-form" enctype="multipart/form-data">
+			{% csrf_token %}
+			{% for field in form %}
+				{% if field.label_tag != "Author" %}
+    				<div class="fieldWrapper">
+						<h6 class="w3-text-grey w3-bar black. w3-wide w3-padding w3-card container">{{ field.errors }}</h6>
+    					<h6 class="w3-text-grey w3-bar black. w3-wide w3-padding w3-card container">{{ field.label_tag }}: {{ field }}</h6>
+    				</div>
+				{% endif %}
+			{% endfor %}
+			<button type="submit" class="save btn btn-default">Save</button>
+		</form>
+		<div class="w3-third w3-container w3-margin-bottom">
+			{% for message in messages %}
+				<p id="messages">{{message}}</p>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

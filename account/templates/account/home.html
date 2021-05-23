@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% extends 'account/main.html' %}
+{% block content %}
+<head>
+    <title>User_data</title>
+</head>
+
+<body>
+	<form method="GET" action="" name="myform" value="home" id="subform">
+		{% csrf_token %}
+	</form>
+	<div class="w3-main">
+		<div class="container my_padding">
+			<div class="w3-bar w3-black w3-wide w3-padding w3-card container">
+				<div class="w3-row-padding">
+				<div class="my_small_bottom_padding" style="{float:left; width:50%}">
+					<form method="GET">
+					{% csrf_token %}
+						<span class="w3-margin-right">Filter by username:</span>
+						<div class="form-group">
+							<input class="w3-input w3-border" type="text" name="name" placeholder="Insert user_name to search for posts..." required>
+							<button type="submit" name="demux" value="filter" class="submit_input btn">
+								<span class="fa fa-search"></span>
+							</button>
+						</div>
+					</form>
+				</div>
+
+				<div class="my_small_top_padding" style="{float:right; width:50%}">
+					<form method="GET">
+					{% csrf_token %}
+						<span class="w3-margin-right">Search in the blog by word:</span>
+						<div class="form-group">
+							<input type="text" class="w3-input w3-border" placeholder="Search in the blog" name="word">
+							<button type="submit" class="submit_input btn" name="demux" value="search_words">
+								<span class="fa fa-search"></span>
+							</button>
+						</div>
+					</form>
+				</div>
+				<!-- Hack search form -->
+				<div class="my_small_top_padding">
+					<form method="GET">
+					{% csrf_token %}
+						<button name="demux" value="validate" type="submit" class="btn"><span class="fa fa-search">Validate</span></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	<hr>
+		<div class="w3-bar w3-black w3-wide w3-padding w3-card container">
+			{% for post in posts %}
+			<div>
+				<div class="mypost">
+					<div>
+						<h6>{{ post.author|linebreaksbr }} , {{ post.published_date }} </h6>
+					</div>
+					<h2>{{ post.title }}</h2>
+					{% if post.image %}
+					<div class="w3-col w3-margin-bottom">
+					    <div class="w3-display-container dim-fixed">
+							<div><img class="post-img" src="{{ post.image.url }}" alt="Travelling"></div>
+						</div>
+					</div>
+					{% endif %}
+					<p><a href="{% url 'post_detail' pk=post.pk %}">
+					<button class="w3-button w3-light-grey w3-block">Read more</button>
+					</a></p>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+
+		{% for message in messages %}
+			<p id="messages">{{message}}</p>
+		{% endfor %}
+
+		  <!-- Pagination -->
+		<div class="w3-center w3-padding-32">
+			<div class="w3-bar">
+				<form id="page">
+				{% csrf_token %}
+					{% load t_tag_one %}
+					{% if posts.has_other_pages %}
+					    <ul class="pagination">
+						{% if posts.has_previous %}
+						  <!--<li><a href="?page={{ posts.previous_page_number }}">&laquo;</a></li>-->
+						  <li><a href="?{% param_replace page=posts.previous_page_number %}">&laquo;</a></li>
+						{% else %}
+						  <li class="disabled"><span>&laquo;</span></li>
+						{% endif %}
+						{% for i in posts.paginator.page_range %}
+						  {% if posts.number == i %}
+							<li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+						  {% else %}
+							<li><a href="?{% param_replace page=i %}" class="w3-hover-black">{{ i }}</a></li>
+						  {% endif %}
+						{% endfor %}
+						{% if posts.has_next %}
+						  <li><a href="?{% param_replace page=posts.next_page_number %}" class="w3-hover-black">&raquo;</a></li>
+						{% else %}
+						  <li class="disabled"><span>&raquo;</span></li>
+						{% endif %}
+					  </ul>
+					{% endif %}
+				</form>
+			</div>
+		</div>
+
+	</div>
+</body>
+{% endblock %}
