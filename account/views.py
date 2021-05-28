@@ -34,25 +34,38 @@ def on_blockchain():
 
 
 def manage_transaction(data, post):
-    ganache_url = "HTTP://127.0.0.1:7545"
-    web3 = Web3(Web3.HTTPProvider(ganache_url))
-    private_key = "feb886fd922d51ccd6170d5c766840027251b57926569966b8e2ae91003e317e"
-    address = "0xe5d1Bd67C204D84bcE2aBA811bF38abCb1E75e83"
+    infura_url = "https://ropsten.infura.io/v3/de19542993aa47f98c02ebc4b5eb7bed"
+    web3 = Web3(Web3.HTTPProvider(infura_url))
     nonce = web3.eth.getTransactionCount(address)
+    gasPrice = web3.eth.gasPrice
     tx = {
         'nonce': nonce,
-        'to': "0x683B22115d9Af932dc9DA61025229A6b282ce558",
+        'to': '0x0000000000000000000000000000000000000000',
         'value': web3.toWei(0, 'ether'),
-        'gas': 1000000,
-        'gasPrice': web3.toWei('50', 'gwei'),
+        'gas': 100000,
+        'gasPrice': gasPrice,
         'data': data.encode('utf-8')
     }
     signed_tx = web3.eth.account.signTransaction(tx, private_key)
     tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
     relevant_post = Post.objects.get(id=post)
-    relevant_post.transaction_id = web3.toHex(tx_hash)
+    transaction_id = web3.toHex(tx_hash)
+    relevant_post.transaction_id = transaction_id
     relevant_post.on_blockchain = True
     relevant_post.save()
+ 
+
+
+def transaction_verification(request):
+    infura_url = "https://ropsten.infura.io/v3/de19542993aa47f98c02ebc4b5eb7bed"
+    web3 = Web3(Web3.HTTPProvider(infura_url))
+    posts = Post.objects.all()
+    data = []
+    for post in posts:
+        transaction = post.transaction_id
+        data.append(web3.eth.getTransaction(transaction))
+    return HttpResponse(data)
+
 
 
 def get_client_ip(request):
