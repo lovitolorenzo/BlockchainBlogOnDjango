@@ -19,6 +19,11 @@ import re
 
 logger = logging.getLogger('django')
 
+#wallet features
+address = "0xf329CE0cBE53D2b66D3113D3074b8cE5E057e446"
+private_key = "0x86ad07d7614d1a4db8dc4b3f7630a5eabd934dc3649fa10fbcbb853324821e44"
+
+
 
 
 def on_blockchain():
