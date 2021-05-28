@@ -8,5 +8,5 @@ The main feature, though, is that each post you'll write (author, datetime, text
 If you want, try it and let me know what do you think about, thanks.
 
 <h2>Technologies & Resources</h2>
-<strong>Django, Python, HTML, CSS, Ganache</strong>
+<strong>Django, Python, HTML, CSS, Infura</strong>
 
