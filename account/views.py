@@ -25,7 +25,6 @@ private_key = "0x86ad07d7614d1a4db8dc4b3f7630a5eabd934dc3649fa10fbcbb853324821e4
 
 
 
-
 def on_blockchain():
     posts = Post.objects.filter(on_blockchain=False)
     for post in posts:
@@ -56,9 +55,11 @@ def manage_transaction(data, post):
     relevant_post = Post.objects.get(id=post)
     transaction_id = web3.toHex(tx_hash)
     relevant_post.transaction_id = transaction_id
+    #transaction_verification = web3.eth.getTransaction(transaction_id)
     relevant_post.on_blockchain = True
     relevant_post.save()
- 
+    #print(transaction_verification)
+
 
 
 def transaction_verification(request):
@@ -391,3 +392,4 @@ def last_hour_posts(request):
 #https://programmer.group/django-paginator-ajax-dynamic-load-paging.html
 #https://simpleisbetterthancomplex.com/tutorial/2016/08/03/how-to-paginate-with-django.html
 #https://www.caktusgroup.com/blog/2018/10/18/filtering-and-pagination-django/
+
