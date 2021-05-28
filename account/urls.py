@@ -17,4 +17,6 @@ urlpatterns = [
 	path('user_posts/<int:pk>', views.user_posts, name='user_posts'),
     path('postcounter', views.postcounter, name='postcounter'),
     path('json/last_hour', views.last_hour_posts, name='last_hour_posts'),
+	path('transaction/verification', views.transaction_verification, name='transaction_verification'),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
