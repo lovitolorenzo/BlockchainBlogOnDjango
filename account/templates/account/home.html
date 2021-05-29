@@ -18,7 +18,7 @@
 					{% csrf_token %}
 						<span class="w3-margin-right">Filter by username:</span>
 						<div class="form-group">
-							<input class="w3-input w3-border" type="text" name="name" placeholder="Insert user_name to search for posts..." required>
+							<input class="w3-input w3-light-grey w3-border" type="text" name="name" placeholder="Insert user name to search for posts" required>
 							<button type="submit" name="demux" value="filter" class="submit_input btn">
 								<span class="fa fa-search"></span>
 							</button>
@@ -31,7 +31,7 @@
 					{% csrf_token %}
 						<span class="w3-margin-right">Search in the blog by word:</span>
 						<div class="form-group">
-							<input type="text" class="w3-input w3-border" placeholder="Search in the blog" name="word">
+							<input type="text" class="w3-input w3-light-grey w3-border" placeholder="Search in the blog" name="word">
 							<button type="submit" class="submit_input btn" name="demux" value="search_words">
 								<span class="fa fa-search"></span>
 							</button>
@@ -72,7 +72,7 @@
 		</div>
 
 		{% for message in messages %}
-			<p id="messages">{{message}}</p>
+			<p class="w3-text-grey w3-bar black. w3-wide w3-padding w3-card container" id="messages">{{message}}</p>
 		{% endfor %}
 
 		  <!-- Pagination -->
@@ -106,7 +106,7 @@
 				</form>
 			</div>
 		</div>
-
 	</div>
+</div>
 </body>
 {% endblock %}
