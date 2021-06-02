@@ -1,6 +1,6 @@
 # BlockchainBlogOnDjango
 
-<div style="border-bottom: 1px solid lightgrey;"><a href="https://lorenzolovito.eu.pythonanywhere.com"><h1>Visit the Website</h1></a></div>
+<a href="https://lorenzolovito.eu.pythonanywhere.com"><h1>Visit the Website</h1></a>
  
         
  
