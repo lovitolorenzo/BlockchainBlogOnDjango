@@ -1,8 +1,9 @@
 # BlockchainBlogOnDjango
 
-    <a href="https://lorenzolovito.eu.pythonanywhere.com">
-        <h1>Visit the Website</h1>
-    </a>
+<div style="border-bottom: 1px solid lightgrey;"><a href="https://lorenzolovito.eu.pythonanywhere.com"><h1>Visit the Website</h1></a></div>
+ 
+        
+ 
 
 This website works like a blog, and it actually is.It works on SQL database ( relational database); here you can register your own account and it also provides a personal data endpoint based dinamically on each account logged in.<br>
 You can, obviously, write your own posts, load images on each post, see all posts you wrote, search posts by word or by username/author in a search bar.<br>
